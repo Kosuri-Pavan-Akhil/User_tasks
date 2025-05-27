@@ -17,11 +17,31 @@ namespace Tasks.Services
         {
             _context = context;
         }
-
+        // Normal User
         public async Task<IEnumerable<TaskReadDto>> GetTasksForUserAsync(int userId, int pageNumber, int pageSize)
         {
             var tasks = await _context.Tasks
                 .Where(t => t.UserId == userId)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Select(t => new TaskReadDto
+                {
+                    Id = t.Id,
+                    Title = t.Title,
+                    Description = t.Description,
+                    DueDate = t.DueDate,
+                    Status = t.Status,
+                    UserId = t.UserId
+                })
+                .ToListAsync();
+
+            return tasks;
+        }
+
+        // Admin all tasks 
+        public async Task<IEnumerable<TaskReadDto>> GetAllTasksAsync(int pageNumber, int pageSize)
+        {
+            var tasks = await _context.Tasks
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .Select(t => new TaskReadDto
@@ -124,4 +144,3 @@ namespace Tasks.Services
         }
     }
 }
-

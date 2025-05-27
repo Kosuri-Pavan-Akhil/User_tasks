@@ -6,21 +6,21 @@ namespace Tasks.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class AuthController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IAuthService _authService;
 
-        public UserController(IUserService userService)
+        public AuthController(IAuthService authService)
         {
-            _userService = userService;
+            _authService = authService;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterDto registerDto)
+        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
             try
             {
-                var user = await _userService.RegisterAsync(registerDto);
+                var user = await _authService.RegisterAsync(registerDto);
                 return Ok(user);
             }
             catch (Exception ex)
@@ -30,11 +30,11 @@ namespace Tasks.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDto loginDto)
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
             try
             {
-                var token = await _userService.LoginAsync(loginDto);
+                var token = await _authService.LoginAsync(loginDto);
                 return Ok(new { Token = token });
             }
             catch (Exception ex)

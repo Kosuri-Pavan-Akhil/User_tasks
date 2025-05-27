@@ -16,6 +16,6 @@ namespace Tasks.Dtos.User
         public string Password { get; set; }
 
         [Required]
-        public string Role { get; set; } // "Admin" or "User"
+        public string Role { get; set; } = "User"; // "Admin" or "User"
     }
 }

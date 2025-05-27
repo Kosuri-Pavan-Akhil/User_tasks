@@ -3,11 +3,10 @@ using Tasks.Models;
 
 namespace Tasks.Services.Interfaces
 {
-    public interface IUserService
+    public interface IAuthService
     {
         Task<UserReadDto> RegisterAsync(RegisterDto registerDto);
         Task<string> LoginAsync(LoginDto loginDto);
-        Task<User> GetUserByUsernameAsync(string username);
+        int? ValidateToken(string token);
     }
 }
-

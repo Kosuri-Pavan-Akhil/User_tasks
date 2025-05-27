@@ -29,12 +29,21 @@ namespace Tasks.Controllers
             return User.IsInRole("Admin");
         }
 
+        // Updated GetTasks method to allow Admins to get all tasks, others get only their own
         [HttpGet]
         public async Task<IActionResult> GetTasks([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var userId = GetUserId();
-            var tasks = await _taskService.GetTasksForUserAsync(userId, pageNumber, pageSize);
-            return Ok(tasks);
+            if (IsAdmin())
+            {
+                var tasks = await _taskService.GetAllTasksAsync(pageNumber, pageSize);
+                return Ok(tasks);
+            }
+            else
+            {
+                var userId = GetUserId();
+                var tasks = await _taskService.GetTasksForUserAsync(userId, pageNumber, pageSize);
+                return Ok(tasks);
+            }
         }
 
         [HttpGet("{id}")]

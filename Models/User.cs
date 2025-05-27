@@ -20,7 +20,7 @@
         public byte[] PasswordSalt { get; set; }
 
         [Required]
-        public string Role { get; set; } // "Admin" or "User"
+        public string Role { get; set; } = "User";// "Admin" or "User"
 
         public virtual ICollection<TaskItem> Tasks { get; set; } // Navigation property
     }

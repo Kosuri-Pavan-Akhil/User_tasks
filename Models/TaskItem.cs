@@ -13,7 +13,7 @@
         [Required]
         public string Title { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
         public DateTime? DueDate { get; set; }
 

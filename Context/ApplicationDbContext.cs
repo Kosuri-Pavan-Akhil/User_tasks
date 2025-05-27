@@ -17,7 +17,6 @@
         {
             base.OnModelCreating(modelBuilder);
 
-            // Optional: add seed data or configuration here if needed
         }
     }
 }
