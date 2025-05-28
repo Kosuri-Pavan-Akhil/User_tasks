@@ -41,7 +41,7 @@ namespace Tasks.Services
                 Email = registerDto.Email,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
-                Role = registerDto.Role // Use Role from the DTO here
+                Role = registerDto.Role 
             };
 
             _context.Users.Add(user);
