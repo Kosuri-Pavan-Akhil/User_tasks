@@ -9,6 +9,7 @@ using Tasks.Dtos.User;
 using Tasks.Models;
 using Tasks.Services.Interfaces;
 using Tasks.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Tasks.Services
 {
@@ -24,7 +25,7 @@ namespace Tasks.Services
             _configuration = configuration;
             _passwordHasher = passwordHasher;
         }
-
+        [Authorize]
         public async Task<UserReadDto> RegisterAsync(RegisterDto registerDto)
         {
             if (await _context.Users.AnyAsync(u => u.Username == registerDto.Username))
@@ -117,6 +118,8 @@ namespace Tasks.Services
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 var userId = int.Parse(jwtToken.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value);
+                var role = jwtToken.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+
 
                 return userId;
             }

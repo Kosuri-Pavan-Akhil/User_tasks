@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Tasks.Dtos.User;
 using Tasks.Services.Interfaces;
 
@@ -15,7 +16,7 @@ namespace Tasks.Controllers
         {
             _authService = authService;
         }
-
+        [Authorize(Roles ="Admin")] // Only Admin Must be Able to Register new users that come to Portal
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
