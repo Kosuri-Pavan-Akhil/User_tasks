@@ -25,7 +25,7 @@ namespace Tasks.Services
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<UserReadDto> RegisterAsync(RegisterDto registerDto)
+        public async Task<UserReadDto> RegisterAsync(CreateUserDto registerDto)
         {
             if (await _context.Users.AnyAsync(u => u.Username == registerDto.Username))
                 throw new Exception("Username already exists");
@@ -33,7 +33,7 @@ namespace Tasks.Services
             if (await _context.Users.AnyAsync(u => u.Email == registerDto.Email))
                 throw new Exception("Email already exists");
 
-            _passwordHasher.CreatePasswordHash(registerDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            _passwordHasher.CreatePasswordHash(registerDto.Password, out  byte[] passwordHash, out byte[] passwordSalt);
 
             var user = new User
             {

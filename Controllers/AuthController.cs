@@ -17,7 +17,7 @@ namespace Tasks.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
+        public async Task<IActionResult> Register([FromBody] CreateUserDto registerDto)
         {
             try
             {

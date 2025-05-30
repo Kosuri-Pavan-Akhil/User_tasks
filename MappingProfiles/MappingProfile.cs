@@ -12,7 +12,7 @@ namespace Tasks.MappingProfiles
         {
             // User mappings
             CreateMap<User, UserReadDto>();
-            CreateMap<RegisterDto, User>();
+            CreateMap<CreateUserDto, User>();
 
             // Task mappings
             CreateMap<TaskItem, TaskReadDto>();

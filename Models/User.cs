@@ -1,5 +1,6 @@
 ﻿namespace Tasks.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
     public class User
@@ -15,7 +16,7 @@
 
         [Required]
         public byte[] PasswordHash { get; set; }
-
+        
         [Required]
         public byte[] PasswordSalt { get; set; }
 
@@ -23,5 +24,10 @@
         public string Role { get; set; } = "User";// "Admin" or "User"
 
         public virtual ICollection<TaskItem> Tasks { get; set; } // Navigation property
+
+       // public static implicit operator User(User v)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -5,7 +5,7 @@ namespace Tasks.Services.Interfaces
 {
     public interface IAuthService
     {
-        Task<UserReadDto> RegisterAsync(RegisterDto registerDto);
+        Task<UserReadDto> RegisterAsync(CreateUserDto registerDto);
         Task<string> LoginAsync(LoginDto loginDto);
         int? ValidateToken(string token);
     }
