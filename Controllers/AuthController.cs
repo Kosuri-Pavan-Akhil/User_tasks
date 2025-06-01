@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Tasks.Dtos.User;
 using Tasks.Services.Interfaces;
 
+// test commit to check if the code is working correctly` yhdgydsgfdy
 namespace Tasks.Controllers
 {
     [ApiController]
@@ -14,7 +16,7 @@ namespace Tasks.Controllers
         {
             _authService = authService;
         }
-
+        [Authorize(Roles ="Admin")] // Only Admin Must be Able to Register new users that come to Portal
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
